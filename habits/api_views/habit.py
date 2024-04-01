@@ -10,7 +10,7 @@ from habits.serializers.habit import HabitSerializer
 
 class HabitPublicListAPIView(ListAPIView):
     serializer_class = HabitSerializer
-    queryset = Habit.objects.filter(is_published=True)
+    queryset = Habit.objects.filter(is_public=True)
     pagination_class = HabitPaginator
 
 

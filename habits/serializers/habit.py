@@ -30,7 +30,7 @@ class HabitSerializer(serializers.ModelSerializer):
         model = Habit
         fields = (
             'pk', 'user', 'award', 'place', 'execution_time', 'action', 'is_pleasant', 'related_habit', 'frequency',
-            'time_to_complete', 'is_publiс', 'telegram_id',)
+            'time_to_complete', 'is_public', 'telegram_id',)
 
         validators = [
             UniqueTogetherValidator(
