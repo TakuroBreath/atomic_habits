@@ -6,6 +6,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'atomic_habits.settings')
 
 app = Celery('atomic_habits')
 
-app.config_from_object('django.conf:atomic_habits', namespace='CELERY')
+app.config_from_object('django.conf:settings', namespace='CELERY')
 
 app.autodiscover_tasks()
