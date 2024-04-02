@@ -12,9 +12,9 @@ class HabitSerializer(serializers.ModelSerializer):
 
     frequency = serializers.IntegerField(validators=[validators.validator_frequency])
 
-    related_habit = serializers.PrimaryKeyRelatedField(
+    parent_habit = serializers.PrimaryKeyRelatedField(
         queryset=Habit.objects.all(),
-        validators=[validators.validator_related_habit],
+        validators=[validators.validator_parent_habit],
         allow_null=True,
         required=False
     )
@@ -29,14 +29,14 @@ class HabitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Habit
         fields = (
-            'pk', 'user', 'award', 'place', 'execution_time', 'action', 'is_pleasant', 'related_habit', 'frequency',
+            'pk', 'user', 'award', 'place', 'execution_time', 'action', 'is_pleasant', 'parent_habit', 'frequency',
             'time_to_complete', 'is_public', 'telegram_id',)
 
         validators = [
             UniqueTogetherValidator(
                 queryset=Habit.objects.all(),
-                fields=['award', 'related_habit', 'is_pleasant'],
+                fields=['award', 'parent_habit', 'is_pleasant'],
             ),
-            validators.validator_exclude_award_and_related_habit,
-            validators.validator_not_award_or_related_habit
+            validators.validator_exclude_award_and_parent_habit,
+            validators.validator_not_award_or_parent_habit
         ]
