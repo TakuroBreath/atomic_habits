@@ -10,7 +10,7 @@ from users.models import User
 class HabitSerializer(serializers.ModelSerializer):
     time_to_complete = serializers.IntegerField(validators=[validators.validator_time_to_complete])
 
-    frequency = serializers.IntegerField(validators=[validators.validator_frequency])
+    periodic = serializers.IntegerField(validators=[validators.validator_periodic])
 
     parent_habit = serializers.PrimaryKeyRelatedField(
         queryset=Habit.objects.all(),
@@ -29,7 +29,7 @@ class HabitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Habit
         fields = (
-            'pk', 'user', 'award', 'place', 'execution_time', 'action', 'is_pleasant', 'parent_habit', 'frequency',
+            'pk', 'user', 'award', 'place', 'execution_time', 'action', 'is_pleasant', 'parent_habit', 'periodic',
             'time_to_complete', 'is_public', 'telegram_id',)
 
         validators = [

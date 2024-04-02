@@ -30,7 +30,7 @@ def validator_not_award_or_parent_habit(value):
         raise serializers.ValidationError('A pleasant habit cannot have a reward or a parent habit.')
 
 
-def validator_frequency(value):
+def validator_periodic(value):
     max_frequency = 7
     if value > max_frequency:
         raise serializers.ValidationError(f'You should not perform the habit less than once every {max_frequency} days')
