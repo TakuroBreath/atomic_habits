@@ -5,28 +5,8 @@ from users.models import User
 
 
 class UserTestCase(APITestCase):
-    """
-    Test case for the User model and associated API views.
-
-    Setup creates a sample User object.
-
-    Attributes:
-        user (User): A sample User object for testing.
-        client (APIClient): The test client for making API requests.
-
-    Methods:
-        setUp(): Creates the sample User object.
-        test_user_create(): Tests the creation of a User object through the API.
-        test_user_list(): Tests the retrieval of a list of User objects through the API.
-        test_user_update(): Tests the update of a User object through the API.
-        test_user_delete(): Tests the deletion of a User object through the API.
-    """
 
     def setUp(self):
-        """
-        Set up the test environment by creating a sample User object.
-        """
-
         self.user = User.objects.create(
             email='2368045max@gmail.com',
             password='Pass123',
@@ -37,10 +17,6 @@ class UserTestCase(APITestCase):
         self.client.force_authenticate(user=self.user)
 
     def test_user_create(self):
-        """
-        Test the creation of a User object through the API.
-        """
-
         data = {
             "email": "test_user@gmail.com",
             "telegram_id": 123456789,
@@ -56,10 +32,6 @@ class UserTestCase(APITestCase):
         )
 
     def test_user_list(self):
-        """
-        Test the retrieval of a list of User objects through the API.
-        """
-
         response = self.client.get(
             '/users/users/',
         )
@@ -83,10 +55,6 @@ class UserTestCase(APITestCase):
         )
 
     def test_user_update(self):
-        """
-        Test the update of a User object through the API.
-        """
-
         updated_data = {
             "email": self.user.email,
             "phone": "+123456789",
@@ -105,10 +73,6 @@ class UserTestCase(APITestCase):
         )
 
     def test_user_delete(self):
-        """
-        Test the deletion of a User object through the API.
-        """
-
         response = self.client.delete(
             f'/users/users/{self.user.pk}/',
         )

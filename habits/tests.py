@@ -6,28 +6,9 @@ from users.models import User
 
 
 class HabitTestCase(APITestCase):
-    """
-    Test case for the Habit model and associated API views.
-
-    Setup creates a test user with authentication and a sample Habit object.
-
-    Attributes:
-        user (User): The test user for authentication.
-        client (API Client): The test client for making API requests.
-        habit (Habit): A sample Habit object for testing.
-
-    Methods:
-        setUp(): Creates the test user, client, and sample Habit object.
-        test_habit_create(): Tests the creation of a Habit object through the API with an invalid request.
-        test_habit_list(): Tests the retrieval of a list of Habit objects through the API.
-        test_habit_update(): Tests the update of a Habit object through the API with an invalid request.
-        test_habit_delete(): Tests the deletion of a Habit object through the API.
-    """
 
     def setUp(self):
-        """
-        Set up the test environment by creating a test user, a test client, and a sample Habit object.
-        """
+
         existing_user = User.objects.filter(email='test@gmail.com').first()
 
         if existing_user:
@@ -54,9 +35,6 @@ class HabitTestCase(APITestCase):
         )
 
     def test_habit_create(self):
-        """
-        Test the creation of a Habit object through the API with an invalid request.
-        """
 
         data = {
             "user": self.user,
@@ -82,9 +60,6 @@ class HabitTestCase(APITestCase):
         )
 
     def test_habit_list(self):
-        """
-        Test the retrieval of a list of Habit objects through the API.
-        """
         response = self.client.get(
             '/habit/list/',
         )
@@ -120,9 +95,6 @@ class HabitTestCase(APITestCase):
         )
 
     def test_habit_update(self):
-        """
-        Test the update of a Habit object through the API with an invalid request.
-        """
         updated_data = {
             "pk": self.habit.pk,
             "user": self.user.email,
@@ -149,9 +121,7 @@ class HabitTestCase(APITestCase):
         )
 
     def test_habit_delete(self):
-        """
-        Test the deletion of a Habit object through the API.
-        """
+
         response = self.client.delete(
             f'/habit/delete/{self.habit.pk}/',
         )
@@ -163,28 +133,9 @@ class HabitTestCase(APITestCase):
 
 
 class AwardTestCase(APITestCase):
-    """
-    Test case for the Award model and associated API views.
-
-    Setup creates a test user with authentication and a sample Award object.
-
-    Attributes:
-        user (User): The test user for authentication.
-        client (API Client): The test client for making API requests.
-        award (Award): A sample Award object for testing.
-
-    Methods:
-        setUp(): Creates the test user, client, and sample Award object.
-        test_award_create(): Tests the creation of an Award object through the API.
-        test_award_list(): Tests the retrieval of a list of Award objects through the API.
-        test_award_update(): Tests the update of an Award object through the API.
-        test_award_delete(): Tests the deletion of an Award object through the API.
-    """
 
     def setUp(self):
-        """
-        Set up the test environment by creating a test user, a test client, and a sample Award object.
-        """
+
         existing_user = User.objects.filter(email='test_award@gmail.com').first()
 
         if existing_user:
@@ -204,9 +155,6 @@ class AwardTestCase(APITestCase):
         )
 
     def test_award_create(self):
-        """
-        Test the creation of an Award object through the API.
-        """
 
         data = {
             "user": self.user,
@@ -224,9 +172,6 @@ class AwardTestCase(APITestCase):
         )
 
     def test_award_list(self):
-        """
-        Test the retrieval of a list of Award objects through the API.
-        """
 
         response = self.client.get(
             '/award/list/',
@@ -249,9 +194,6 @@ class AwardTestCase(APITestCase):
         )
 
     def test_award_update(self):
-        """
-        Test the update of an Award object through the API.
-        """
 
         updated_data = {
             "user": self.user.email,
@@ -269,9 +211,6 @@ class AwardTestCase(APITestCase):
         )
 
     def test_award_delete(self):
-        """
-        Test the deletion of an Award object through the API.
-        """
 
         response = self.client.delete(
             f'/award/delete/{self.award.pk}/',
