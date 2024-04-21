@@ -92,9 +92,10 @@ WSGI_APPLICATION = 'atomic_habits.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'USER': 'postgres',
         'NAME': os.getenv('DB_NAME'),
-        'PASSWORD': os.getenv('DB_PASS'),
+        'USER': os.getenv('DB_USER'),
+        'HOST': os.getenv('DB_DOCKER'),
+        'PASSWORD': os.getenv('DB_PASSWORD')
     }
 }
 
@@ -176,9 +177,12 @@ CORS_ALLOW_HEADERS = (
     "x-requested-with",
 )
 
-CELERY_BROKER_URL = os.getenv('REDIS_BACKEND')  # Redis connection
 
-CELERY_RESULT_BACKEND = os.getenv('REDIS_BACKEND')
+REDIS_HOST = os.getenv('REDIS_HOST')
+REDIS_PORT = os.getenv('REDIS_PORT')
+
+CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}'
+CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}'
 
 CELERY_TIMEZONE = TIME_ZONE
 
