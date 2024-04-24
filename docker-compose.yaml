@@ -7,16 +7,17 @@ services:
       - '6378:6379'
 
   db:
-    image: postgres
+    restart: always
+    image: postgres:14.7-alpine
     env_file:
       - .env
+    expose:
+      - '5432'
     volumes:
-      - pg_data:/var/lib/postgresql/pgdata
-    ports:
-      - '5435:5432'
+      - postgres_data:/var/lib/postgresql/data/
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
-      interval: 10s
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
       timeout: 5s
       retries: 5
 
@@ -52,4 +53,4 @@ services:
       - app
 
 volumes:
-  pg_data:
+  postgres_data:
